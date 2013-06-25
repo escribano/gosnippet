@@ -1,0 +1,74 @@
+{{define "base"}}<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>{{.Title}}</title>
+		{{template "css" .}}
+	</head>
+	<body>
+		<div>
+			{{if .User}}
+			<button id="signout">Sign out</button>
+			{{else}}
+			<input id="signin" type="image" src="/static/img/persona_sign_in_blue.png" alt="Sign in with Persona" />
+			{{end}}
+		<div>
+
+		<div>
+			{{template "body" .}}
+		</div>
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+		<script src="https://login.persona.org/include.js"></script>
+		<script>
+		{{if .User}}
+		var currentUser = '{{.User}}';
+		var signoutLink = document.getElementById('signout');
+		if (signoutLink) {
+			signoutLink.onclick = function() { navigator.id.logout(); };
+		}
+		{{else}}
+		var currentUser = 'david@buro9.com'; // null;
+		var signinLink = document.getElementById('signin');
+		if (signinLink) {
+			signinLink.onclick = function() { navigator.id.request(); };
+		}
+		{{end}}
+
+		navigator.id.watch({
+			loggedInUser: currentUser,
+			onlogin: function(assertion) {
+				$.ajax({
+					type: 'POST',
+					url: '/auth/login',
+					data: {assertion: assertion},
+					success: function(res, status, xhr) {
+						alert("Login success");
+						//window.location.reload();
+					},
+					error: function(xhr, status, err) {
+						navigator.id.logout();
+						alert("Login failure: " + err);
+					}
+				});
+			},
+			onlogout: function() {
+				$.ajax({
+					type: 'POST',
+					url: '/auth/logout',
+					success: function(res, status, xhr) {
+						alert("Logout success");
+						//window.location.reload();
+					},
+					error: function(xhr, status, err) {
+						alert("Logout failure: " + err); 
+					}
+				});
+			}
+		});
+		</script>
+		{{template "js" .}}
+	</body>
+</html>{{end}}

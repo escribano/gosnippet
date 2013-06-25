@@ -1,0 +1,29 @@
+[listen]
+
+interface = "" # Empty string for all interfaces
+port = 8080
+
+[persona]
+
+audience = "http://localhost:8080"
+
+[database]
+
+host = "localhost"
+port = 5432
+database = "gosnippet"
+username = "gosnippet"
+password = "gosnippet"
+
+[memcached]
+
+host = "127.0.0.1"
+port = 11211
+
+[directories]
+
+# Relative to the directory gosnippet is run from, trailing slash
+# is important. Ideally these directories are in /srv/gosnippet/*/
+# in a prod environment. Note the trailing slash is required.
+templates = "./views/"
+static = "./static/"

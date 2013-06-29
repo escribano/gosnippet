@@ -121,7 +121,7 @@ func (c *LoginController) Post() {
 		HttpOnly: true,
 	}
 
-	http.SetCookie(c.Context.ResponseWriter, cookie)
+	http.SetCookie(c.Context.ResponseWriter, &cookie)
 
 	c.Context.SendStatus(http.StatusOK)
 

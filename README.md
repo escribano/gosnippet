@@ -9,11 +9,11 @@ For that reason, rather than create a complex app with caveats like "you shouldn
 This app is not a framework... it's just a pulling together of libraries with a set of conventions that will help developers with knowledge of Rails or Django to make the jump to Go.
 
 This app uses:
-    * [Gorilla Mux](http://www.gorillatoolkit.org/pkg/mux)
-    * [cron](https://github.com/robfig/cron)
-    * [libpq](https://github.com/lib/pq)
-    * [memcache](https://github.com/bradfitz/gomemcache)
-    * [toml-go](https://github.com/laurent22/toml-go)
+* [Gorilla Mux](http://www.gorillatoolkit.org/pkg/mux)
+* [cron](https://github.com/robfig/cron)
+* [libpq](https://github.com/lib/pq)
+* [memcache](https://github.com/bradfitz/gomemcache)
+* [toml-go](https://github.com/laurent22/toml-go)
 
 What this app does... not much, it's just a GitHub Gist type thing... post code, have it stored in the database, have it formatted prettily when it is displayed. It will only keep code for 1 month, after which it will auto-delete it (needed to find some excuse to put scheduled tasks in).
 
